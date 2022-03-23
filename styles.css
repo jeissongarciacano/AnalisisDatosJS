@@ -1,0 +1,8 @@
+body {
+    width:70%;
+}
+div {
+    display: flex;
+    flex-direction: row;
+    text-align: justify;
+}
