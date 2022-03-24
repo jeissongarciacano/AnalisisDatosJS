@@ -1,5 +1,7 @@
 body {
     width:70%;
+    margin: 5%;
+    margin-left: 400px;
 }
 div {
     display: flex;
