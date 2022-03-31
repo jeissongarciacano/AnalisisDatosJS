@@ -1,10 +1,12 @@
 body {
-    width:70%;
-    margin: 5%;
-    margin-left: 400px;
+    width:50%;
+    margin:auto;
 }
 div {
     display: flex;
     flex-direction: row;
-    text-align: justify;
+    text-align: center;
+}
+#details {
+    padding: 10px;
 }
