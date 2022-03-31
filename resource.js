@@ -1,7 +1,7 @@
 let body = d3.select("#body")
 let container = d3.select("#container-grap1")
 
-d3.csv("Datos_Longitudinales.xlsx").then((data) => {
+d3.csv("Datos_Longitudinales.csv").then((data) => {
     showData(data);
 })
 
