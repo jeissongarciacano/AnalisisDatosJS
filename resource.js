@@ -1,63 +1,39 @@
-let body = d3.select("#body")
-let container = d3.select("#container-grap1")
-
-d3.csv("Datos_Longitudinales.csv").then((data) => {
-    showData(data);
-})
-
-function showData(clients) {
+var svg = d3.select("#container-grap1"),
+            margin = 200,
+            width = svg.attr("width") - margin,
+            height = svg.attr("height") - margin
 
 
-    let bodyWidth = 300;
-    let bodyHeight = 300;
-    let xExtent = d3.extent(clients, d => +d.Weight)
-    let xScale = d3.scaleLinear().range([0, bodyWidth])
-        .domain([xExtent[0] - 5, xExtent[1] + 5])
+var xScale = d3.scaleBand().range([0, width]).padding(0.4),
+            yScale = d3.scaleLinear().range([height, 0]);
+
+var g = svg.append("g")
+            .attr("transform", "translate(" + 100 + "," + 100 + ")");
+
+    d3.csv("Data.csv", function(error, data) {
+        if (error) {
+            throw error;
+        }
+
+        xScale.domain(data.map(function(d) { return d.id; }));
+        yScale.domain([0, d3.max(data, function(d) { return d.BIRTH_peso5; })]);
+
+        g.append("g")
+         .attr("transform", "translate(0," + height + ")")
+         .call(d3.axisBottom(xScale));
+
+        g.append("g")
+         .call(d3.axisLeft(yScale).tickFormat(function(d){
+             return "$" + d;
+         }).ticks(10));
 
 
-    let yExtent = d3.extent(clients, d => +d.Height)
-    let yScale = d3.scaleLinear().range([bodyHeight, 0])
-        .domain([yExtent[0] - 5, yExtent[1] + 5])
-
-    let join = body.selectAll("circle")
-        .data(clients)
-
-    let newelements = join.enter()
-        .append("circle")
-        .style("fill", "blue")
-        .style("r", "5")
-
-    join.merge(newelements)
-        .transition()
-        .attr("cx", d => xScale(+d.Weight))
-        .attr("cy", d => yScale(+d.Height))
-
-
-    let yAxis = d3.axisLeft(yScale);
-    let yAxisGroup = d3.select("#yAxis")
-        .style("transform", "translate(40px, 10px)")
-        .call(yAxis)
-
-    let xAxis = d3.axisBottom(xScale)
-    let xAxisGroup = d3.select("#xAxis")
-        .style("transform", `translate(40px, ${bodyHeight + 10}px)`)
-        .call(xAxis)
-
-    let zoom = d3.zoom()
-    zoom.on("zoom", function (a, b) {
-        let newXScale = d3.event.transform.rescaleX(xScale);
-        let newYScale = d3.event.transform.rescaleY(yScale);
-
-        xAxis.scale(newXScale)
-        xAxisGroup.call(xAxis)
-
-        yAxis.scale(newYScale)
-        yAxisGroup.call(yAxis)
-
-        join.merge(newelements)
-            .attr("cx", d => newXScale(+d.Weight))
-            .attr("cy", d => newYScale(+d.Height))
+        g.selectAll(".bar")
+         .data(data)
+         .enter().append("rect")
+         .attr("class", "bar")
+         .attr("x", function(d) { return xScale(d.id); })
+         .attr("y", function(d) { return yScale(d.BIRTH_peso5); })
+         .attr("width", xScale.bandwidth())
+         .attr("height", function(d) { return height - yScale(d.BIRTH_peso5); });
     });
-    container.call(zoom)
-
-}
