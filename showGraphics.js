@@ -6,8 +6,11 @@ let showGraphics = function (data, person) {
     let gContainer = d3.select("#gContainer");
     console.log(person);
     //Show Sex
-    let sexo = person.BIRTH_sexo5 == "2" ? "Masculino" : "Femenino";
-    gContainer.append("div").attr("id", "gTitle").text(sexo);
+    let gender = person.BIRTH_sexo5 == "2" ? "Masculino" : "Femenino";
+    let birth = person.Birth_cesarea == "0" ? "No" : "Yes";
+
+    gContainer.select(".genderText").text("Gender: "+gender);
+    gContainer.select(".bithText").text("Cesaria Birth: "+birth);
 
     //fix height
     data.map(function (d) {
