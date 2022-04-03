@@ -3,9 +3,8 @@ let height = 200
 
 
 let showGraphics = function (data, person) {
-    console.log(data);
     let gContainer = d3.select("#gContainer");
-
+    console.log(person);
     //Show Sex
     let sexo = person.BIRTH_sexo5 == "2" ? "Masculino" : "Femenino";
     gContainer.append("div").attr("id", "gTitle").text(sexo);
@@ -21,12 +20,59 @@ let showGraphics = function (data, person) {
     }
 
     let weightData = [{ time: 1, value: parseInt(person.BIRTH_talla5) }, { time: 2, value: parseInt(person.FOLL12M_talla12) }];
-    generateLineWeight(data,weightData);
+    generateLineWeight(data, weightData);
+    
+    let heightData = [{ time: 1, value: parseInt(person.BIRTH_peso5) }, { time: 2, value: parseInt(person.FOLL12M_peso12) }];
+    generateLineHeight(data, heightData);
+}
+
+let formatTime = function (option) { 
+    switch (option) { 
+        case 1||"1": return "Birth";
+        case 2||"2": return "Year";
+        default: return "NaN";
+    }
+}
+
+let generateLineHeight = function (data, heightData) { 
+    let timeline = d3.select("#timelineHeight")
+    let width = 100;
+    let bodyHeight = height - margin.top - margin.bottom;
+    let bodyWidth = width - margin.left - margin.right;
+    let maxHeight = d3.max(data, d => d.FOLL12M_peso12);
+
+    let yScale = d3.scaleLinear()
+        .range([bodyHeight, 0])
+        .domain([0, maxHeight]);
+    
+    let xScale = d3.scaleLinear()
+        .range([0, bodyWidth])
+        .domain([1, 2]);
+
+    let lineGenerator = d3.line()
+        .x(d => xScale(d.time))
+        .y(d => yScale(d.value));
+    
+    timeline.select(".body")
+        .attr("transform", `translate(${margin.left},${margin.top})`)
+        .select("path").datum(heightData)
+        .attr("d", lineGenerator)
+    
+    timeline.select(".xAxis")
+        .attr("transform", `translate(${margin.left},${height - margin.bottom})`)
+        .call(d3.axisBottom(xScale)
+            .ticks(1)
+            .tickFormat(d => formatTime(d)));
+    timeline.select(".yAxis")
+        .attr("transform", `translate(${margin.left},${margin.top})`)
+        .call(d3.axisLeft(yScale)
+            .ticks(5)
+            .tickFormat(d => d + "gr"));
 }
 
 let generateLineWeight = function (data,weightData) {
     let timeline = d3.select("#timelineWeight")
-    let width = 20;
+    let width = 100;
     let bodyHeight = height - margin.top - margin.bottom;
     let bodyWidth = width - margin.left - margin.right;
     let maxWeight = d3.max(data, d => d.FOLL12M_talla12);
@@ -36,7 +82,7 @@ let generateLineWeight = function (data,weightData) {
         .domain([0, maxWeight]);
     
     let xScale = d3.scaleLinear()
-        .range([0, 20])
+        .range([0, bodyWidth])
         .domain([1, 2]);
     
     let lineGenerator = d3.line()
@@ -50,16 +96,18 @@ let generateLineWeight = function (data,weightData) {
     
     timeline.select(".xAxis")
         .attr("transform", `translate(${margin.left},${height - margin.bottom})`)
-        .call(d3.axisBottom(xScale).ticks(1))
+        .call(d3.axisBottom(xScale)
+            .ticks(1)
+            .tickFormat(d=>formatTime(d)));
     
     timeline.select(".yAxis")
         .attr("transform", `translate(${margin.left},${margin.top})`)
         .call(d3.axisLeft(yScale)
             .ticks(5)
-        .tickFormat(d => d + "cm"));
+            .tickFormat(d => d + "cm"));
  }
 
 
 d3.csv("data.csv").then((data) => {
-    showGraphics(data, data[0]);
+    showGraphics(data, data[3]);
 });
