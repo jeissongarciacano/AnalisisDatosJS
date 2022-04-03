@@ -12,8 +12,6 @@ function Main() {
 
     ejex = document.getElementById("ejex").value;
     ejey = document.getElementById("ejey").value;
-    console.log(ejex);
-    console.log(ejey);
 
     if(ejex == 0 || ejey == 0){
         window.alert("seleccione un dato");
@@ -45,12 +43,12 @@ function showData(clients) {
 
     let bodyWidth = 300;
     let bodyHeight = 300;
-    let xExtent = d3.extent(clients, d => +d.BIRTH_peso5)
+    let xExtent = d3.extent(clients, d => +d[ejex])
     let xScale = d3.scaleLinear().range([0, bodyWidth])
         .domain([xExtent[0] - 5, xExtent[1] + 5])
 
 
-    let yExtent = d3.extent(clients, d => +d.BIRTH_talla5)
+    let yExtent = d3.extent(clients, d => +d[ejey])
     let yScale = d3.scaleLinear().range([bodyHeight, 0])
         .domain([yExtent[0] - 5, yExtent[1] + 5])
 
@@ -64,8 +62,8 @@ function showData(clients) {
 
     join.merge(newelements)
         .transition()
-        .attr("cx", d => xScale(+d.BIRTH_peso5))
-        .attr("cy", d => yScale(+d.BIRTH_talla5))
+        .attr("cx", d => xScale(+d[ejex]))
+        .attr("cy", d => yScale(+d[ejey]))
 
 
     let yAxis = d3.axisLeft(yScale);
@@ -90,8 +88,8 @@ function showData(clients) {
         yAxisGroup.call(yAxis)
 
         join.merge(newelements)
-            .attr("cx", d => newXScale(+d.BIRTH_peso5))
-            .attr("cy", d => newYScale(+d.BIRTH_talla5))
+            .attr("cx", d => newXScale(+d[ejex]))
+            .attr("cy", d => newYScale(+d[ejey]))
             .on("mouseenter", (d) => { 
                 let dat = "Hombre"
                 if (d.BIRTH_sexo5 == 2) {
@@ -110,9 +108,9 @@ function showData(clients) {
                 d3.select("#tooltip").style("display", "none")
             })
             .on("click", (d) => {
-                console.log(d)
+                selecteddata= d[ejex];
                 showGraphics(clients,d);
-            })
+            }).merge(container).style("fill", d => d[ejex]== selecteddata ? "red" : "orange") //change color
 
     });
     container.call(zoom)
