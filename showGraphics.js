@@ -92,6 +92,6 @@ let generateLineChart = function (max, data,timeline,suffix) {
             .tickFormat(d => d + suffix));
 }
 
-d3.csv("data.csv").then((data) => {
-    showGraphics(data, data[3]);
-});
+// d3.csv("data.csv").then((data) => {
+//     showGraphics(data, data[3]);
+// });

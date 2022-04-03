@@ -110,7 +110,8 @@ function showData(clients) {
                 d3.select("#tooltip").style("display", "none")
             })
             .on("click", (d) => {
-                console.log("metodo kevin");
+                console.log(d)
+                showGraphics(clients,d);
             })
 
     });
