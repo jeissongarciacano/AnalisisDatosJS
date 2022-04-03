@@ -1,12 +1,47 @@
 let body = d3.select("#body")
 let container = d3.select("#container-grap1")
 
-d3.csv("Data.csv").then((data) => {
-    showData(data);
-})
+let selecteddata = undefined;
+
+let ejex;
+let ejey;
+
+function Main() {
+
+    clear();
+
+    ejex = document.getElementById("ejex").value;
+    ejey = document.getElementById("ejey").value;
+    console.log(ejex);
+    console.log(ejey);
+
+    if(ejex == 0 || ejey == 0){
+        window.alert("seleccione un dato");
+    }
+    else{
+        d3.csv("Data.csv").then((data) => {
+            showData(data);
+        })
+    } 
+}
+
+//limpiar datos
+function clear(){
+    body.selectAll("*").remove();
+}
+
+function showTooltip(text, coords) {
+    let x = coords[0];
+    let y = coords[1];
+
+    d3.select("#tooltip")
+      .style("display", "block")
+      .style("top", y)
+      .style("left", x)
+      .text(text)
+  }
 
 function showData(clients) {
-
 
     let bodyWidth = 300;
     let bodyHeight = 300;
@@ -24,7 +59,7 @@ function showData(clients) {
 
     let newelements = join.enter()
         .append("circle")
-        .style("fill", "blue")
+        .style("fill", "orange")
         .style("r", "5")
 
     join.merge(newelements)
@@ -57,7 +92,39 @@ function showData(clients) {
         join.merge(newelements)
             .attr("cx", d => newXScale(+d.BIRTH_peso5))
             .attr("cy", d => newYScale(+d.BIRTH_talla5))
+            .on("mouseenter", (d) => { 
+                let dat = "Hombre"
+                if (d.BIRTH_sexo5 == 2) {
+                  dat = "Mujer";
+                }
+                showTooltip(dat, [d3.event.clientX, d3.event.clientY])
+            })
+            .on("mousemove", (d) => {
+                let dat = "Hombre"
+                if (d.BIRTH_sexo5 == 2) {
+                  dat = "Mujer";
+                }
+                showTooltip(dat, [d3.event.clientX, d3.event.clientY + 30])
+            })
+            .on("mouseleave", (d) => {
+                d3.select("#tooltip").style("display", "none")
+            })
+            .on("click", (d) => {
+                console.log("metodo kevin");
+            })
+
     });
     container.call(zoom)
 
+}
+
+function showTooltip(text, coords) {
+    let x = coords[0];
+    let y = coords[1];
+
+    d3.select("#tooltip")
+        .style("display", "block")
+        .style("top", y)
+        .style("left", x)
+        .text(text)
 }

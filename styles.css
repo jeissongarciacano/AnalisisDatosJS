@@ -10,3 +10,16 @@ div {
 #details {
     padding: 10px;
 }
+svg {
+    border: solid 1px #000;
+    margin-top: 10px;
+}
+#tooltip {
+    position: fixed;
+    top: 10px;
+    left: 0px;
+    padding: 5px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: solid 1px black;
+    display: none;
+}
