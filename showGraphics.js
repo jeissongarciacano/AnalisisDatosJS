@@ -12,11 +12,11 @@ let showGraphics = function (data, person) {
     //fix height
     data.map(function (d) {
         if (parseInt(d.BIRTH_talla5) > parseInt(d.FOLL12M_talla12)) {
-            d.FOLL12M_talla12 = d.FOLL12M_talla12 + "0";
+            d.FOLL12M_talla12 = parseInt(d.FOLL12M_talla12)*10;
         }
     });
     if (parseInt(person.BIRTH_talla5) > parseInt(person.FOLL12M_talla12)) {
-        person.FOLL12M_talla12 = person.FOLL12M_talla12 + "0";
+        person.FOLL12M_talla12 = parseInt(person.FOLL12M_talla12)*10;
     }
 
     //weight
@@ -29,7 +29,22 @@ let showGraphics = function (data, person) {
     let heightData = [{ time: 1, value: parseInt(person.BIRTH_peso5) }, { time: 2, value: parseInt(person.FOLL12M_peso12) }];
     let maxHeight = d3.max(data, d => d.FOLL12M_peso12);
     let timelineHeight = d3.select("#timelineHeight")
-    generateLineChart(maxHeight, heightData,timelineHeight,"gr");
+    generateLineChart(maxHeight, heightData, timelineHeight, "gr");
+    
+    //fix head circumference
+    data.map(function (d) {
+        if (parseInt(d.BIRTH_pc5) > parseInt(d.FOLL12M_pc12)) {
+            d.FOLL12M_pc12 = parseInt(d.FOLL12M_pc12)*10;
+        }
+    });
+    if (parseInt(person.BIRTH_pc5) > parseInt(person.FOLL12M_pc12)) {
+        person.FOLL12M_pc12 = parseInt(person.FOLL12M_pc12) * 10;
+    }
+    //head circumference
+    let headCircumferenceData = [{ time: 1, value: parseInt(person.BIRTH_pc5) }, { time: 2, value: parseInt(person.FOLL12M_pc12) }];
+    let maxHeadCircumference = d3.max(data, d => d.FOLL12M_pc12);
+    let timelineHeadCircumference = d3.select("#timelineHeadCircumference")
+    generateLineChart(maxHeadCircumference, headCircumferenceData, timelineHeadCircumference, "cm");
 }
 
 let formatTime = function (option) { 
