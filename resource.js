@@ -98,7 +98,7 @@ function showData(clients) {
                 showTooltip(dat, [d3.event.clientX, d3.event.clientY])
             })
             .on("mousemove", (d) => {
-                let dat = "Hombre"
+                let dat = "Ver mas"
                 if (d.BIRTH_sexo5 == 2) {
                   dat = "Mujer";
                 }
@@ -108,9 +108,10 @@ function showData(clients) {
                 d3.select("#tooltip").style("display", "none")
             })
             .on("click", (d) => {
-                selecteddata= d[ejex];
+                selecteddata = d[ejex];
+                selecteddata2 = d[ejey];
                 showGraphics(clients,d);
-            }).merge(container).style("fill", d => d[ejex]== selecteddata ? "red" : "orange") //change color
+            }).merge(container).style("fill", d => d[ejex] == selecteddata && d[ejey] == selecteddata2 ? "red" : "orange") //change color
 
     });
     container.call(zoom)
