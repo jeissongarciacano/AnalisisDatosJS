@@ -1,8 +1,6 @@
 let body = d3.select("#body")
 let container = d3.select("#container-grap1")
 
-let selecteddata = undefined;
-let selecteddata2 = undefined;
 
 let ejex;
 let ejey;
@@ -167,9 +165,6 @@ function showData(clients) {
             })
             .on("mousemove", (d) => {
                 let dat = "Ver mas"
-                /*if (d.BIRTH_sexo5 == 2) {
-                  dat = "Mujer";
-                }*/
                 showTooltip(dat, [d3.event.clientX, d3.event.clientY + 30])
             })
             .on("mouseleave", (d) => {
