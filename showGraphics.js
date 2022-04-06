@@ -26,13 +26,13 @@ let showGraphics = function (data, person) {
     let weightData = [{ time: 1, value: parseInt(person.BIRTH_talla5) }, { time: 2, value: parseInt(person.FOLL12M_talla12) }];
     let maxWeight = d3.max(data, d => d.FOLL12M_talla12);
     let timelineWeight = d3.select("#timelineWeight")
-    generateLineChart(maxWeight, weightData,timelineWeight,"cm");
+    generateLineChart(maxWeight, weightData,timelineWeight,"mm");
     
     //height
     let heightData = [{ time: 1, value: parseInt(person.BIRTH_peso5) }, { time: 2, value: parseInt(person.FOLL12M_peso12) }];
     let maxHeight = d3.max(data, d => d.FOLL12M_peso12);
     let timelineHeight = d3.select("#timelineHeight")
-    generateLineChart(maxHeight, heightData, timelineHeight, "gr");
+    generateLineChart(maxHeight, heightData, timelineHeight, "g");
     
     //fix head circumference
     data.map(function (d) {
@@ -47,7 +47,7 @@ let showGraphics = function (data, person) {
     let headCircumferenceData = [{ time: 1, value: parseInt(person.BIRTH_pc5) }, { time: 2, value: parseInt(person.FOLL12M_pc12) }];
     let maxHeadCircumference = d3.max(data, d => d.FOLL12M_pc12);
     let timelineHeadCircumference = d3.select("#timelineHeadCircumference")
-    generateLineChart(maxHeadCircumference, headCircumferenceData, timelineHeadCircumference, "cm");
+    generateLineChart(maxHeadCircumference, headCircumferenceData, timelineHeadCircumference, "mm");
 }
 
 let formatTime = function (option) { 

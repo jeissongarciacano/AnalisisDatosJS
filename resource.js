@@ -2,6 +2,7 @@ let body = d3.select("#body")
 let container = d3.select("#container-grap1")
 
 let selecteddata = undefined;
+let selecteddata2 = undefined;
 
 let ejex;
 let ejey;
@@ -46,22 +47,22 @@ function madedata(id,axis){
             text = "<br>Genero:<br>1 = Femenino<br>2 = Masculino";
             break; 
         case "BIRTH_peso5":
-            text = "<br>Peso: gramos<br>Valido más de 491g<br>0 = Datos perdidos";
+            text = "<br>Peso:<br>gramos<br>Valido más de 491g<br>0 = Datos perdidos";
             break;
         case "BIRTH_talla5":
-            text = "<br>Talla: milimetros<br>Valido más de 485mm<br>6 <= D , Datos perdidos";
+            text = "<br>Talla:<br>milimetros<br>Valido más de 485mm<br>6 <= D , Datos perdidos";
             break; 
         case "BIRTH_pc5":
-            text = "<br>Circunferencia de la cabeza: milimetros<br>Valido más de 406mm<br>85 <= D , Datos perdidos";
+            text = "<br>Circunferencia de la cabeza:<br>milimetros<br>Valido más de 406mm<br>85 <= D , Datos perdidos";
             break;
         case "FOLL12M_peso12":
-            text = "<br>Peso: gramos<br>Valido más de 449g<br>42 <= D , Datos perdidos";
+            text = "<br>Peso:<br>gramos<br>Valido más de 449g<br>42 <= D , Datos perdidos";
             break;
         case "FOLL12M_talla12":
-            text = "<br>Talla: milimetros<br>Valido más de 444mm<br>47 <= D , Datos perdidos";
+            text = "<br>Talla:<br>milimetros<br>Valido más de 444mm<br>47 <= D , Datos perdidos";
             break;
         case "FOLL12M_pc12":
-            text = "<br>Circunferencia de la cabeza: milimetros<br>Valido más de 451mm<br>40 <= D , Datos perdidos";
+            text = "<br>Circunferencia de la cabeza:<br>milimetros<br>Valido más de 451mm<br>40 <= D , Datos perdidos";
             break;
         case "FOLL12M_infanib12":
             text = "<br>Neuromotor test:<br>0 = No se realizo la evaluacion<br><br>1 = Normal<br><br>2 = Transitorio<br><br>3 = Anormal";
