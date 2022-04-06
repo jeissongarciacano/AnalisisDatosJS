@@ -1,6 +1,8 @@
 let body = d3.select("#body")
 let container = d3.select("#container-grap1")
 
+let selecteddata;
+let selecteddata2;
 
 let ejex;
 let ejey;
@@ -156,13 +158,6 @@ function showData(clients) {
         join.merge(newelements)
             .attr("cx", d => newXScale(+d[ejex]))
             .attr("cy", d => newYScale(+d[ejey]))
-            .on("mouseenter", (d) => { 
-                let dat = "Hombre"
-                if (d.BIRTH_sexo5 == 2) {
-                  dat = "Mujer";
-                }
-                showTooltip(dat, [d3.event.clientX, d3.event.clientY])
-            })
             .on("mousemove", (d) => {
                 let dat = "Ver mas"
                 showTooltip(dat, [d3.event.clientX, d3.event.clientY + 30])
@@ -175,7 +170,6 @@ function showData(clients) {
                 selecteddata2 = d[ejey];
                 showGraphics(clients,d);
             })
-            .merge(container)
             .style("fill", d => d[ejex] == selecteddata && d[ejey] == selecteddata2 ? "red" : "orange") //change color
     });
     container.call(zoom)
