@@ -12,28 +12,61 @@
         <div class="container-fluid">
             <div class="row">
                     <section id="grap1" class="col">
-                        <h4>Visualizador datos recien nacidos</h4>
+                        <h4>Visualizador datos</h4>
                         <h6>Dato X</h6>
                         <select class="form-select" id="ejex" aria-label="Default select example">
+                            
                             <option selected value="0">seleccione el dato del eje X</option>
+                            <optgroup label = "Datos recien nacidos"></optgroup>
                             <option value="Tratamiento">Tratamiento</option>
                             <option value="Pretermino">Pretermino</option>
                             <option value="BIRTH_cesarea">Cesarea</option>
-                            <option value="BIRTH_peso5">Peso</option>
-                            <option value="BIRTH_talla5">Talla</option>
                             <option value="BIRTH_sexo5">Sexo</option>
-                            <option value="BIRTH_pc5">Circunferencia de cabeza</option>
+                            <option value="BIRTH_peso5">Peso recien nacido</option>
+                            <option value="BIRTH_talla5">Talla recien nacido</option>
+                            <option value="BIRTH_pc5">Circunferencia de cabeza recien nacido</option>
+                            </optgroup>
+                            <optgroup label = "Datos seguimiento 1 año"></optgroup>
+                            <option value="FOLL12M_peso12">Peso seguimiento 1 año</option>
+                            <option value="FOLL12M_talla12">Talla seguimiento 1 año</option>
+                            <option value="FOLL12M_pc12">Circunferencia de cabeza seguimiento 1 año</option>
+                            <option value="FOLL12M_infanib12">Neuromotor seguimiento 1 año</option>
+                            </optgroup>
+                            <optgroup label = "Datos seguimiento 20 años"></optgroup>
+                            <option value="aseg_cerveletWMtotal">Cervelet WM total seguimiento 20 años</option>
+                            <option value="aseg_cerveletGMtotal">Cervelet GM total seguimiento 20 años</option>
+                            <option value="aseg_hipocampototal">Cipocampo total seguimiento 20 años</option>
+                            <option value="aseg_caudatetotal">Caudate total seguimiento 20 años</option>
+                            <option value="aseg_putamentotal">Putamen total seguimiento 20 años</option>
+                            <option value="aseg_amigdalatotal">Amigdala total seguimiento 20 años</option>
+                            </optgroup>
                         </select>
                         <h6>Dato Y</h6>
                         <select class="form-select" id="ejey" aria-label="Default select example">
                             <option selected value="0">seleccione el dato del eje Y</option>
+                            <optgroup label = "Datos recien nacidos"></optgroup>
                             <option value="Tratamiento">Tratamiento</option>
                             <option value="Pretermino">Pretermino</option>
                             <option value="BIRTH_cesarea">Cesarea</option>
-                            <option value="BIRTH_peso5">Peso</option>
-                            <option value="BIRTH_talla5">Talla</option>
                             <option value="BIRTH_sexo5">Sexo</option>
-                            <option value="BIRTH_pc5">Circunferencia de cabeza</option>
+                            <option value="BIRTH_peso5">Peso recien nacido</option>
+                            <option value="BIRTH_talla5">Talla recien nacido</option>
+                            <option value="BIRTH_pc5">Circunferencia de cabeza recien nacido</option>
+                            </optgroup>
+                            <optgroup label = "Datos seguimiento 1 año"></optgroup>
+                            <option value="FOLL12M_peso12">Peso seguimiento 1 año</option>
+                            <option value="FOLL12M_talla12">Talla seguimiento 1 año</option>
+                            <option value="FOLL12M_pc12">Circunferencia de cabeza seguimiento 1 año</option>
+                            <option value="FOLL12M_infanib12">Neuromotor seguimiento 1 año</option>
+                            </optgroup>
+                            <optgroup label = "Datos seguimiento 20 años"></optgroup>
+                            <option value="aseg_cerveletWMtotal">Cervelet WM total seguimiento 20 años</option>
+                            <option value="aseg_cerveletGMtotal">Cervelet GM total seguimiento 20 años</option>
+                            <option value="aseg_hipocampototal">Hipocampo total seguimiento 20 años</option>
+                            <option value="aseg_caudatetotal">Caudate total seguimiento 20 años</option>
+                            <option value="aseg_putamentotal">Putamen total seguimiento 20 años</option>
+                            <option value="aseg_amigdalatotal">Amigdala total seguimiento 20 años</option>
+                            </optgroup>
                         </select>
                         <button onclick="Main()">Graficar</button> 
                         <svg id="container-grap1" height="350" width="350" , style="border: solid 1px #000; margin-top: 10px">
@@ -42,14 +75,18 @@
                             <g id="xAxis"></g>
                         </svg>
                         <div id="tooltip">Tooltip</div>
-                    </section>
-                    <section id="grap2" class="col">
-                        <h4>Relacion datos</h4>
-                        <svg id="container-grap2" height="350" width="350" , style="border: solid 1px #000; margin-top: 10px">
-                            <g id="body" style="transform:translate(40px,10px)"></g>
-                            <g id="yAxis"></g>
-                            <g id="xAxis"></g>
-                        </svg>
+                        <div>
+                            <h6>Explicacion eje X</h6>
+                            <p id="dataejex">
+
+                            </p>
+                        </div>
+                        <div>
+                            <h6>Explicacion eje Y</h6>
+                            <p id="dataejey">
+                                
+                            </p>
+                        </div>
                     </section>
             </div>
             <div id="gContainer" class="row">
