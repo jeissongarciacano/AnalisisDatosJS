@@ -7,6 +7,10 @@ div{
     flex-direction: row;
     text-align: center;
 }
+#gContainer{
+    text-align:justify;
+
+}
 #details {
     padding: 10px;
 }

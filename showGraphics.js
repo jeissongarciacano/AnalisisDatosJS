@@ -7,10 +7,10 @@ let showGraphics = function (data, person) {
     console.log(person);
     //Show Sex
     let gender = person.BIRTH_sexo5 == "2" ? "Masculino" : "Femenino";
-    let birth = person.Birth_cesarea == "0" ? "No" : "Yes";
+    let birth = person.Birth_cesarea == "0" ? "No" : "Si";
 
-    gContainer.select(".genderText").text("Gender: "+gender);
-    gContainer.select(".bithText").text("Cesaria Birth: "+birth);
+    gContainer.select(".genderText").text("Genero: "+gender);
+    gContainer.select(".bithText").text("Nacimiento por cesaria: "+birth);
 
     //fix height
     data.map(function (d) {
@@ -52,8 +52,8 @@ let showGraphics = function (data, person) {
 
 let formatTime = function (option) { 
     switch (option) { 
-        case 1||"1": return "Birth";
-        case 2||"2": return "Year";
+        case 1||"1": return "0 meses";
+        case 2||"2": return "12 meses";
         default: return "NaN";
     }
 }
