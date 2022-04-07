@@ -35,6 +35,7 @@ h4{
     margin: 10px;
     font-family: "JetBrains Mono",monospace;
 }
+
 button{
     align-items: center;
     appearance: none;
@@ -124,4 +125,7 @@ select:hover {
 select:active {
     box-shadow: #D6D6E7 0 3px 7px inset;
     transform: translateY(2px);
+}
+p{
+    font-size:15px;
 }

@@ -52,8 +52,8 @@ let showGraphics = function (data, person) {
 
 let formatTime = function (option) { 
     switch (option) { 
-        case 1||"1": return "0 meses";
-        case 2||"2": return "12 meses";
+        case 1||"1": return "0";
+        case 2||"2": return "12";
         default: return "NaN";
     }
 }
